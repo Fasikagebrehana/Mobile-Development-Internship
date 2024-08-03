@@ -1,6 +1,33 @@
+// import 'dart:html';
+import 'dart:ffi';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:practice/main.dart';
+import 'package:image_picker/image_picker.dart';
+
+class ImgPicker {
+  final ImagePicker _picker = ImagePicker();
+
+  Future<File?> pickImageFromGallery() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      return File(pickedFile.path);
+    }
+    return null;
+  }
+
+  Future<File?> pickImageFromCamera() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      return File(pickedFile.path);
+    }
+    return null;
+  }
+}
 
 class Add extends StatefulWidget {
   const Add({Key? key}) : super(key: key);
@@ -11,6 +38,17 @@ class Add extends StatefulWidget {
 
 class _AddState extends State<Add> {
   @override
+  File? _image;
+  final ImgPicker _imagePicker = ImgPicker();
+  Future<void> _pickImage() async {
+    final File? imageFile = await _imagePicker.pickImageFromGallery();
+    if (imageFile != null) {
+      setState(() {
+        _image = imageFile;
+      });
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -54,16 +92,22 @@ class _AddState extends State<Add> {
                       // border: Border.all(),
                       borderRadius: BorderRadius.circular(10)),
                   child: GestureDetector(
+                      onTap: _pickImage,
                       child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.image_outlined,
-                      ),
-                      SizedBox(height: 10),
-                      Text("Upload your data")
-                    ],
-                  )),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _image == null
+                              ? Icon(
+                                  Icons.image_outlined,
+                                )
+                              : Image.file(_image!,
+                                  width: double.infinity,
+                                  height: 150,
+                                  fit: BoxFit.cover),
+                          SizedBox(height: 10),
+                          Text("Upload your data")
+                        ],
+                      )),
                 )),
             Container(
               padding: EdgeInsets.only(left: 20, right: 20),
@@ -207,4 +251,10 @@ class _AddState extends State<Add> {
       ),
     );
   }
+}
+
+@override
+Widget build(BuildContext context) {
+  // TODO: implement build
+  throw UnimplementedError();
 }

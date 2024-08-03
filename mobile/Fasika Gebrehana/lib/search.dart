@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:practice/aboutproduct.dart';
-import 'main.dart';
+// import 'main.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
