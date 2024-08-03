@@ -37,46 +37,56 @@ class Cards extends StatelessWidget {
               ),
             ),
             // Padding(padding: EdgeInsets.all(10.0)
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10.0, top: 10.0),
-                child: Text(
-                  product.name,
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 25,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              Text(
-                product.price.toString(),
-                style: TextStyle(
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500),
-              ),
-            ]),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0, top: 10.0),
+                      child: Text(
+                        product.name,
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      '\$${product.price}',
+                      style: TextStyle(
+                          fontFamily: 'Poppins', fontWeight: FontWeight.w500),
+                    ),
+                  ]),
+            ),
 
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text(
-                product.type,
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  // fontSize: 2,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              Row(children: [
-                Icon(Icons.star, color: Colors.yellow),
-                SizedBox(
-                  width: 2.0,
-                ),
-                Text(
-                  product.rating.toString(),
-                  style: TextStyle(
-                      fontFamily: 'Poppins', fontWeight: FontWeight.w300),
-                ),
-              ])
-            ]),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      product.type,
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        // fontSize: 2,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    Row(children: [
+                      Icon(Icons.star, color: Colors.yellow),
+                      SizedBox(
+                        width: 2.0,
+                      ),
+                      Text(
+                        product.rating.toString(),
+                        style: TextStyle(
+                            fontFamily: 'Poppins', fontWeight: FontWeight.w300),
+                      ),
+                    ])
+                  ]),
+            ),
             // )
           ],
         ),

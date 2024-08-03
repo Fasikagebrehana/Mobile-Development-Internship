@@ -121,7 +121,9 @@ class HomePage extends StatelessWidget {
           ),
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 25),
+              padding: const EdgeInsets.only(
+                bottom: 20,
+              ),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
