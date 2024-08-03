@@ -169,7 +169,7 @@ class _AddState extends State<Add> {
             Column(
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.7,
+                  width: MediaQuery.of(context).size.width * 0.9,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(context,
@@ -187,7 +187,7 @@ class _AddState extends State<Add> {
                 ),
                 SizedBox(height: 10),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.7,
+                  width: MediaQuery.of(context).size.width * 0.9,
                   child: OutlinedButton(
                     onPressed: () {
                       Navigator.push(context,
