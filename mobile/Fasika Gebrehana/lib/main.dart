@@ -5,6 +5,7 @@ import 'add.dart';
 import 'cards.dart';
 import 'productprovider.dart';
 import 'search.dart';
+import 'details_page.dart'; // Ensure this is imported
 
 void main() {
   runApp(
@@ -114,7 +115,17 @@ class HomePage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.white,
                   ),
-                  child: Cards(product: product),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsPage(product: product),
+                        ),
+                      );
+                    },
+                    child: Cards(product: product),
+                  ),
                 ),
               );
             },

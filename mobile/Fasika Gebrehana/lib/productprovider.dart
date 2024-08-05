@@ -57,6 +57,14 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void updateProduct(Product product) {
+    int index = _products.indexWhere((p) => p.name == product.name);
+    if (index != -1) {
+      _products[index] = product;
+      notifyListeners();
+    }
+  }
+
   void deleteProduct(Product product) {
     _products.removeWhere((p) =>
         p.name == product.name &&

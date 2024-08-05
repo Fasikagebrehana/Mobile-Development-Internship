@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:practice/product.dart';
+import 'package:practice/update.dart';
 
 import 'add.dart';
 
@@ -12,143 +13,151 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(top: 29),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 200,
-              child: Stack(
-                children: [
-                  Center(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20.0),
-                        topRight: Radius.circular(20.0),
-                      ),
-                      child: product.imagePath.startsWith('images/')
-                          ? Image.asset(
-                              product.imagePath,
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                            )
-                          : Image.file(
-                              File(product.imagePath),
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                            ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 10,
-                    top: 10,
-                    child: Container(
-                      padding: EdgeInsets.only(left: 2),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.blue,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 29),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 200,
+                child: Stack(
+                  children: [
+                    Center(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20.0),
+                          topRight: Radius.circular(20.0),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
+                        child: product.imagePath.startsWith('images/')
+                            ? Image.asset(
+                                product.imagePath,
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                              )
+                            : Image.file(
+                                File(product.imagePath),
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                              ),
                       ),
                     ),
-                  ),
-                ],
+                    Positioned(
+                      left: 10,
+                      top: 10,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 2),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.blue,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 30),
-                  Row(
-                    children: [
-                      Text(
-                        product.type,
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
-                      ),
-                      Spacer(),
-                      Icon(Icons.star, color: Colors.amber),
-                      SizedBox(width: 5),
-                      Text(product.rating.toString()),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Text(
-                        product.name,
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold),
-                      ),
-                      Spacer(),
-                      SizedBox(height: 8),
-                      Text(
-                        product.price.toString(),
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    "Size:",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 8),
-                  ShoeSize(),
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20, bottom: 20),
-                    child: Text(
-                      product.description,
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 30),
+                    Row(
+                      children: [
+                        Text(
+                          product.type,
+                          style: TextStyle(fontSize: 18, color: Colors.grey),
+                        ),
+                        Spacer(),
+                        Icon(Icons.star, color: Colors.amber),
+                        SizedBox(width: 5),
+                        Text(product.rating.toString()),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Text(
+                          product.name,
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
+                        ),
+                        Spacer(),
+                        SizedBox(height: 8),
+                        Text(
+                          product.price.toString(),
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      "Size:",
                       style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  SizedBox(height: 60),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: () {
-                            // Handle delete action
-                          },
-                          child: Text("DELETE"),
-                          style: OutlinedButton.styleFrom(
-                            primary: Colors.red,
-                            padding: EdgeInsets.symmetric(vertical: 16),
+                    SizedBox(height: 8),
+                    ShoeSize(),
+                    SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20, bottom: 20),
+                      child: Text(
+                        product.description,
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    SizedBox(height: 60),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: OutlinedButton(
+                            onPressed: () {
+                              // Handle delete action
+                            },
+                            child: Text("DELETE"),
+                            style: OutlinedButton.styleFrom(
+                              primary: Colors.red,
+                              padding: EdgeInsets.symmetric(vertical: 16),
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(width: 36),
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => Add()));
-                          },
-                          child: Text("UPDATE"),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.blue,
-                            padding: EdgeInsets.symmetric(vertical: 16),
+                        SizedBox(width: 36),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      UpdatePage(product: product),
+                                ),
+                              );
+                            },
+                            child: Text("UPDATE"),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.blue,
+                              padding: EdgeInsets.symmetric(vertical: 16),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
