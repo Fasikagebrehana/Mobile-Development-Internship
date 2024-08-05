@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontFamily: 'Sora',
-                        fontSize: 13,
+                        fontSize: 10,
                         color: Colors.grey.shade500,
                       ),
                     ),
@@ -74,15 +74,15 @@ class HomePage extends StatelessWidget {
                         Text(
                           "Hello, ",
                           style: TextStyle(
-                            color: Colors.grey.shade900,
-                            fontWeight: FontWeight.w400,
-                          ),
+                              color: Colors.grey.shade900,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 17),
                         ),
                         Text(
                           "Fasika",
                           style: TextStyle(
                             color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],
@@ -103,13 +103,13 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 15), // Space between the Row and ListTile
+            const SizedBox(height: 15),
             ListTile(
               title: Text(
                 "Available Products",
                 style: TextStyle(
                   fontFamily: "Poppins",
-                  fontSize: 25,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),

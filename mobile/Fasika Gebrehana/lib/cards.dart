@@ -45,7 +45,7 @@ class Cards extends StatelessWidget {
                           product.name,
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            fontSize: 20,
+                            fontSize: 18,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
