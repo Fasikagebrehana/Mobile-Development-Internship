@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:practice/product.dart';
 import 'package:practice/update.dart';
-
 import 'add.dart';
 
 class DetailsPage extends StatelessWidget {

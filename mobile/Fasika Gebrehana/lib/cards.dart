@@ -1,7 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'details_page.dart';
 import 'product.dart';
-import 'dart:io';
 
 class Cards extends StatelessWidget {
   const Cards({Key? key, required this.product}) : super(key: key);
