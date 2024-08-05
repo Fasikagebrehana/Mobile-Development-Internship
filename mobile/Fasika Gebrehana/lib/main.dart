@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        toolbarHeight: 120, // Increased height to fit the ListTile
+        toolbarHeight: 130,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -103,7 +103,7 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20), // Space between the Row and ListTile
+            const SizedBox(height: 15), // Space between the Row and ListTile
             ListTile(
               title: Text(
                 "Available Products",
