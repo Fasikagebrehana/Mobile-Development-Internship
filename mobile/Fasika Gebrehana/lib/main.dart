@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'add.dart';
+import 'animationRoute.dart';
 import 'cards.dart';
 import 'product.dart';
 import 'productprovider.dart';
@@ -37,10 +38,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Add()),
-          );
+          Navigator.of(context).push(route(Add()));
         },
         child: Icon(Icons.add),
       ),
@@ -111,7 +109,7 @@ class HomePage extends StatelessWidget {
                 "Available Products",
                 style: TextStyle(
                   fontFamily: "Poppins",
-                  fontSize: 30,
+                  fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -121,7 +119,7 @@ class HomePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: GestureDetector(
-                  onTap: () => {Navigator.of(context).push(_route())},
+                  onTap: () => {Navigator.of(context).push(route(Search()))},
                   child: Icon(
                     Icons.search,
                     size: 40,
@@ -153,17 +151,5 @@ class HomePage extends StatelessWidget {
         },
       ),
     );
-  }
-
-  Route _route() {
-    return PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => Search(),
-        transitionDuration: Duration(seconds: 1),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return FadeTransition(
-            opacity: animation,
-            child: child,
-          );
-        });
   }
 }

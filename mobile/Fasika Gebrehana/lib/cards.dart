@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'animationRoute.dart';
 import 'details_page.dart';
 import 'product.dart';
 
@@ -11,12 +12,10 @@ class Cards extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => DetailsPage(
-                    product: product,
-                  )),
+        Navigator.of(context).push(
+          route(DetailsPage(
+            product: product,
+          )),
         );
       },
       child: Container(
@@ -46,7 +45,7 @@ class Cards extends StatelessWidget {
                           product.name,
                           style: TextStyle(
                             fontFamily: 'Poppins',
-                            fontSize: 25,
+                            fontSize: 20,
                             fontWeight: FontWeight.w600,
                           ),
                         ),

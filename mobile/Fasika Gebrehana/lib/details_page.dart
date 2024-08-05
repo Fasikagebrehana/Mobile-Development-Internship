@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:practice/product.dart';
 import 'package:practice/update.dart';
 import 'add.dart';
+import 'animationRoute.dart';
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({Key? key, required this.product}) : super(key: key);
@@ -134,12 +135,8 @@ class DetailsPage extends StatelessWidget {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      UpdatePage(product: product),
-                                ),
+                              Navigator.of(context).push(
+                                route(UpdatePage(product: product)),
                               );
                             },
                             child: Text("UPDATE"),
