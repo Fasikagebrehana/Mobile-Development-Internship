@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'details_page.dart';
 import 'product.dart';
+import 'dart:io';
 
 class Cards extends StatelessWidget {
   const Cards({Key? key, required this.product}) : super(key: key);
@@ -33,14 +33,8 @@ class Cards extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10.0),
                     topRight: Radius.circular(10.0)),
-                child: Image.asset(
-                  product.imagePath,
-                  fit: BoxFit.cover,
-                  height: MediaQuery.of(context).size.height * 0.2,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                ),
+                child: _buildImage(context, product.imagePath),
               ),
-              // Padding(padding: EdgeInsets.all(10.0)
               Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Row(
@@ -64,7 +58,6 @@ class Cards extends StatelessWidget {
                       ),
                     ]),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Row(
@@ -74,7 +67,6 @@ class Cards extends StatelessWidget {
                         product.type,
                         style: TextStyle(
                           fontFamily: 'Poppins',
-                          // fontSize: 2,
                           fontWeight: FontWeight.w300,
                         ),
                       ),
@@ -92,11 +84,28 @@ class Cards extends StatelessWidget {
                       ])
                     ]),
               ),
-              // )
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildImage(BuildContext context, String imagePath) {
+    if (imagePath.startsWith('images/')) {
+      return Image.asset(
+        imagePath,
+        fit: BoxFit.cover,
+        height: MediaQuery.of(context).size.height * 0.2,
+        width: MediaQuery.of(context).size.width * 0.9,
+      );
+    } else {
+      return Image.file(
+        File(imagePath),
+        fit: BoxFit.cover,
+        height: MediaQuery.of(context).size.height * 0.2,
+        width: MediaQuery.of(context).size.width * 0.9,
+      );
+    }
   }
 }

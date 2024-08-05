@@ -1,16 +1,17 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:practice/add.dart';
 import 'package:practice/product.dart';
+
+import 'add.dart';
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({Key? key, required this.product}) : super(key: key);
   final Product product;
+
   @override
   Widget build(BuildContext context) {
-    // final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      // body: SingleChildScrollView(
       body: Padding(
         padding: const EdgeInsets.only(top: 29),
         child: Column(
@@ -26,11 +27,17 @@ class DetailsPage extends StatelessWidget {
                         topLeft: Radius.circular(20.0),
                         topRight: Radius.circular(20.0),
                       ),
-                      child: Image.asset(
-                        product.imagePath,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                      ),
+                      child: product.imagePath.startsWith('images/')
+                          ? Image.asset(
+                              product.imagePath,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                            )
+                          : Image.file(
+                              File(product.imagePath),
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                            ),
                     ),
                   ),
                   Positioned(
@@ -40,8 +47,6 @@ class DetailsPage extends StatelessWidget {
                       padding: EdgeInsets.only(left: 2),
                       decoration: BoxDecoration(
                         color: Colors.white,
-
-                        // border: Border.all(4),
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: IconButton(
@@ -114,7 +119,9 @@ class DetailsPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // Handle delete action
+                          },
                           child: Text("DELETE"),
                           style: OutlinedButton.styleFrom(
                             primary: Colors.red,
@@ -145,8 +152,6 @@ class DetailsPage extends StatelessWidget {
         ),
       ),
     );
-    // ),
-    // );
   }
 }
 
