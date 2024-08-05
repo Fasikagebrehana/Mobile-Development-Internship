@@ -25,7 +25,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+        '/add': (context) => Add(),
+        '/search': (context) => Search(),
+      },
+      // home: HomePage(),
     );
   }
 }
@@ -38,7 +44,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(route(Add()));
+          Navigator.of(context).pushNamed('/add');
         },
         child: Icon(Icons.add),
       ),
@@ -119,7 +125,7 @@ class HomePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: GestureDetector(
-                  onTap: () => {Navigator.of(context).push(route(Search()))},
+                  onTap: () => {Navigator.of(context).pushNamed('/search')},
                   child: Icon(
                     Icons.search,
                     size: 40,
