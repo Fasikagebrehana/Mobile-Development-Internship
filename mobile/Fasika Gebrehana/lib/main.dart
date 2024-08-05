@@ -5,7 +5,6 @@ import 'add.dart';
 import 'cards.dart';
 import 'productprovider.dart';
 import 'search.dart';
-import 'details_page.dart'; // Ensure this is imported
 
 void main() {
   runApp(
@@ -46,57 +45,91 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        toolbarHeight: 90,
-        title: Row(
+        toolbarHeight: 120, // Increased height to fit the ListTile
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              'images/image.png',
-              height: 40,
-            ),
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+            Row(
               children: [
-                Text(
-                  " July 31, 2024",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontFamily: 'Sora',
-                    fontSize: 13,
-                    color: Colors.grey.shade500,
-                  ),
+                Image.asset(
+                  'images/image.png',
+                  height: 40,
                 ),
-                Row(
+                const SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Hello, ",
+                      " July 31, 2024",
                       style: TextStyle(
-                        color: Colors.grey.shade900,
                         fontWeight: FontWeight.w400,
+                        fontFamily: 'Sora',
+                        fontSize: 13,
+                        color: Colors.grey.shade500,
                       ),
                     ),
-                    Text(
-                      "Fasika",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          "Hello, ",
+                          style: TextStyle(
+                            color: Colors.grey.shade900,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Text(
+                          "Fasika",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
+                const Spacer(),
+                Container(
+                  padding: EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: const Icon(
+                    Icons.notifications_none_outlined,
+                    color: Colors.black,
+                  ),
+                ),
               ],
             ),
-            const Spacer(),
-            Container(
-              padding: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade300),
-                borderRadius: BorderRadius.circular(10.0),
+            const SizedBox(height: 20), // Space between the Row and ListTile
+            ListTile(
+              title: Text(
+                "Available Products",
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              child: const Icon(
-                Icons.notifications_none_outlined,
-                color: Colors.black,
+              trailing: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300, width: 1),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: GestureDetector(
+                  onTap: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Search()),
+                    )
+                  },
+                  child: Icon(
+                    Icons.search,
+                    size: 40,
+                  ),
+                ),
               ),
             ),
           ],
@@ -115,17 +148,7 @@ class HomePage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.white,
                   ),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailsPage(product: product),
-                        ),
-                      );
-                    },
-                    child: Cards(product: product),
-                  ),
+                  child: Cards(product: product),
                 ),
               );
             },

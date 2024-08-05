@@ -57,10 +57,10 @@ class ProductProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateProduct(Product product) {
-    int index = _products.indexWhere((p) => p.name == product.name);
+  void updateProduct(Product oldProduct, Product newProduct) {
+    final int index = _products.indexWhere((p) => p == oldProduct);
     if (index != -1) {
-      _products[index] = product;
+      _products[index] = newProduct;
       notifyListeners();
     }
   }
