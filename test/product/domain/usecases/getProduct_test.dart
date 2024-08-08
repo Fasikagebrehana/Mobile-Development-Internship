@@ -20,7 +20,7 @@ void main() {
       id: '1',
       name: 'All star',
       price: 100,
-      imagePath: 'image',
+      imageUrl: 'image',
       description: 'Best shoe ',
     );
   

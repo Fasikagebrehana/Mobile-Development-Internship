@@ -19,14 +19,14 @@ void main() {
       id: '1',
       name: 'All star',
       price: 100,
-      imagePath: 'image',
+      imageUrl: 'image',
       description: 'Best shoe ',
     ),
     Product(
       id: '2',
       name: 'Vans',
       price: 200,
-      imagePath: 'images',
+      imageUrl: 'images',
       description: 'Best shoe bleh',
     )]
     ;
