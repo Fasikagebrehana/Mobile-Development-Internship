@@ -4,7 +4,7 @@ Overview
 The eCommerce app is built using Clean Architecture principles to ensure a scalable, maintainable, and testable codebase. This document provides an overview of the project structure, including folder organization, and explains the implementation of models and use cases.
 
 Project Structure
-
+```
 Folder Organization
 lib/
 ├── core/
@@ -29,7 +29,7 @@ lib/
 │
 └── main.dart                    # Entry point of the application
 
-
+```
 Core Layer
 
 core/failure/: Contains error handling and failure classes used throughout the app.
