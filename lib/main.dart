@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'product/data/data_sources/remote_data_source.dart';
 
-void main() {
+void main() async {
+  var dataSource = ProductRemoteDataSourceImpl(client: http.Client());
+  var products = await dataSource.getAllProduct();
+  // print("product Listed");
   runApp(const MyApp());
 }
 

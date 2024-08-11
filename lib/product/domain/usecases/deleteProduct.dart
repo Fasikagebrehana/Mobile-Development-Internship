@@ -12,7 +12,7 @@ class Deleteproduct {
   Deleteproduct(this.repository);
 
   @override
-  Future<Either<Failure, Product>> call(String id) async {
-    return await repository.deleteproduct(id);
+  Future<Either<Failure, String>> call(String id) async {
+    return await repository.deleteProduct(id);
   }
   }

@@ -26,4 +26,23 @@ Map<String, dynamic> toJson() => {
   "price": price,
   "imageUrl" : imageUrl,
 };
+
+Product toEntity() => Product(
+  id: id,
+  name: name,
+  description: description,
+  price: price,
+  imageUrl: imageUrl,
+);
+
+factory ProductModel.fromEntity(Product product) {
+    return ProductModel(
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      imageUrl: product.imageUrl,
+    );
+  }
+
 }
