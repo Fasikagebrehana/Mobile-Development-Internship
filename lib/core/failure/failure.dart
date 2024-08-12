@@ -23,3 +23,7 @@ class ConnectionFailure extends Failure {
 class LocalDataSourceFailure extends Failure {
   const LocalDataSourceFailure([String message = 'A local data source failure occurred.']) : super(message);
 }
+
+class CacheFailure extends Failure {
+  const CacheFailure([String message = 'Product not found in local cache']) : super(message);
+}
