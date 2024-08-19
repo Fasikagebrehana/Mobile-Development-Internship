@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:ecommerce/product/data/models/product_model.dart';
-import 'package:ecommerce/product/domain/entities/product.dart';
+import 'package:ecommerce/features/product/data/models/product_model.dart';
+import 'package:ecommerce/features/product/domain/entities/product.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../helpers/json_reader.dart';

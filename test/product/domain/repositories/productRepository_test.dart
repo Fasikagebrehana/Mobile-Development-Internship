@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce/core/failure/failure.dart';
-import 'package:ecommerce/product/domain/usecases/deleteProduct.dart';
+import 'package:ecommerce/features/product/domain/usecases/deleteProduct.dart';
 import '../entities/product.dart';
 
 

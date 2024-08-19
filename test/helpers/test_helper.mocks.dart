@@ -9,11 +9,11 @@ import 'dart:typed_data' as _i11;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:ecommerce/core/failure/failure.dart' as _i7;
-import 'package:ecommerce/product/data/data_sources/remote_data_source.dart'
+import 'package:ecommerce/features/product/data/data_sources/remote_data_source.dart'
     as _i12;
-import 'package:ecommerce/product/data/models/product_model.dart' as _i4;
-import 'package:ecommerce/product/domain/entities/product.dart' as _i8;
-import 'package:ecommerce/product/domain/repositories/productRepository.dart'
+import 'package:ecommerce/features/product/data/models/product_model.dart' as _i4;
+import 'package:ecommerce/features/product/domain/entities/product.dart' as _i8;
+import 'package:ecommerce/features/product/domain/repositories/productRepository.dart'
     as _i5;
 import 'package:http/http.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;

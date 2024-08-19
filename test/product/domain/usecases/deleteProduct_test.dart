@@ -1,9 +1,9 @@
 
 import 'package:dartz/dartz.dart';
-import 'package:ecommerce/product/domain/entities/product.dart';
-import 'package:ecommerce/product/domain/repositories/productRepository.dart';
-import 'package:ecommerce/product/domain/usecases/addProduct.dart';
-import 'package:ecommerce/product/domain/usecases/deleteProduct.dart';
+import 'package:ecommerce/features/product/domain/entities/product.dart';
+import 'package:ecommerce/features/product/domain/repositories/productRepository.dart';
+import 'package:ecommerce/features/product/domain/usecases/addProduct.dart';
+import 'package:ecommerce/features/product/domain/usecases/deleteProduct.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
