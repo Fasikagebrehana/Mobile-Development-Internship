@@ -109,7 +109,7 @@ class _AddProductPageState extends State<AddProductPage> {
                 width: double.infinity,
                 height: 200,
                 decoration: BoxDecoration(
-                  color: Colors.grey[300],
+                  color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: GestureDetector(
@@ -145,14 +145,12 @@ class _AddProductPageState extends State<AddProductPage> {
             Column(
               children: [
 
-                BlocListener<HomeBloc, HomeState>(
+                BlocListener<AddBloc, AddState>(
                   listener: (context, state) {
-                    // TODO: implement listener
-                    if (state is SubmittedState){
-
-                          context.read<HomeBloc>().add(LoadAllProductEvent());
+                    if (state is SubmittedState) {
+                      Navigator.pushNamed(context, '/home');
                     }
-
+                    // TODO: implement listener
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.9,
@@ -189,7 +187,7 @@ class _AddProductPageState extends State<AddProductPage> {
                         backgroundColor: Colors.blue,
                         padding: EdgeInsets.symmetric(vertical: 16),
                       ),
-                      child: Text(
+                      child: const Text(
                         "Add",
                         style: TextStyle(
                           color: Colors.white,

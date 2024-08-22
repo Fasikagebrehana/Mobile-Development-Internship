@@ -14,7 +14,12 @@ import 'features/product/presentation/pages/add.dart';
 import 'features/product/presentation/pages/details_page.dart';
 import 'features/product/presentation/pages/home_page.dart';
 import 'features/product/presentation/pages/search.dart';
-import 'features/product/presentation/pages/splash_screen.dart';
+import 'features/user/presentation/bloc/bloc/login_bloc.dart';
+import 'features/user/presentation/bloc/bloc/profile_bloc.dart';
+import 'features/user/presentation/bloc/bloc/signup_bloc.dart';
+import 'features/user/presentation/pages/login.dart';
+import 'features/user/presentation/pages/signup.dart';
+import 'features/user/presentation/pages/splash_screen.dart';
 import 'features/product/presentation/pages/update.dart';
 
 void main() async {
@@ -34,7 +39,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return 
+    // MaterialApp(
+    //   home: SplashScreen(),
+    //   routes: {
+    //     '/login': (context) => Login(),
+    //       '/signup': (context) => Signup(),
+    //       '/home' : (context) => HomePage(),
+    //   },
+    // );
+    
+  MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => HomeBloc(getIt()),
@@ -42,7 +57,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => UpdateBloc(getIt()),
         ),
-        BlocProvider(create: (context) => DeleteBloc(getIt()))
+        BlocProvider(create: (context) => DeleteBloc(getIt())),
+        BlocProvider(
+          create: (context) => LoginBloc(getIt()),
+        ),
+        BlocProvider(
+          create: (context) => SignupBloc(getIt()),
+        ),
+        BlocProvider(create: (context)=> ProfileBloc(getIt())),
+        
       ],
       child: MaterialApp(
         initialRoute: '/',
@@ -61,12 +84,22 @@ class MyApp extends StatelessWidget {
           return null;
         },
         routes: {
+          '/': (context) => SplashScreen(),
+
           '/add': (context) => BlocProvider(
                 create: (context) => AddBloc(getIt()),
                 child: AddProductPage(),
               ),
           '/search': (context) => const Search(),
-          '/': (context) => HomePage(),
+          '/home': (context) => MultiBlocProvider(
+            providers: [            
+              BlocProvider(create: (context)=> HomeBloc(getIt())),             
+              BlocProvider(create: (context)=> ProfileBloc(getIt())),
+              
+            ],
+            child: HomePage()),
+          '/login': (context) => Login(),
+          '/signup': (context) => Signup(),
           
         },
         debugShowCheckedModeBanner: false

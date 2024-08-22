@@ -1,23 +1,34 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../../../../dependency_injection.dart';
 import '../../../domain/entities/product.dart';
 import '../../../domain/usecases/getAllProduct.dart';
-import '../../../domain/usecases/getproduct.dart';
 
-part '../events/search_event.dart';
-part '../state/search_state.dart';
+part '../events/search_event.dart'; // Corrected: Importing events
+part '../state/search_state.dart'; // Corrected: Importing states
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  late GetAllProduct getAllProduct;
-  SearchBloc(this.getAllProduct) : super(LoadingState()) {
-    on<SearchEvent>((event, emit) async{
-      // TODO: implement event handler
-      emit(LoadingState());
-      var products = await getAllProduct();
-      products.fold((l)=> FailedState(l.message), (r) => emit(LoadedState(r)));
+  final GetAllProduct getAllProduct;
 
-    });
+  SearchBloc(this.getAllProduct) : super(LoadingState()) {
+    on<LoadAllProductEvent>(_onLoadAllProducts);
+    on<SearchProductEvent>(_onSearchProducts);
+  }
+
+  void _onLoadAllProducts(LoadAllProductEvent event, Emitter<SearchState> emit) async {
+    emit(LoadingState());
+    var products = await getAllProduct();
+    products.fold(
+      (failure) => emit(FailedState(failure.message)),
+      (productList) => emit(LoadedState(productList)),
+    );
+  }
+
+  void _onSearchProducts(SearchProductEvent event, Emitter<SearchState> emit) {
+    if (state is LoadedState) {
+      final currentState = state as LoadedState;
+      final filteredProducts = currentState.data.where((product) =>
+          product.name.toLowerCase().contains(event.query.toLowerCase())).toList();
+      emit(LoadedState(filteredProducts));
+    }
   }
 }

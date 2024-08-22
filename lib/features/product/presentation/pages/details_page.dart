@@ -30,7 +30,7 @@ class DetailsPage extends StatelessWidget {
                           children: [
                             Center(
                               child: ClipRRect(
-                                  borderRadius: BorderRadius.only(
+                                  borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(20.0),
                                     topRight: Radius.circular(20.0),
                                   ),
@@ -57,7 +57,7 @@ class DetailsPage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(50),
                                 ),
                                 child: IconButton(
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.arrow_back_ios,
                                     color: Colors.blue,
                                   ),
@@ -93,22 +93,23 @@ class DetailsPage extends StatelessWidget {
                                 children: [
                                   Text(
                                     product.name,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Spacer(),
                                   SizedBox(height: 8),
                                   Text(
-                                    product.price.toString(),
-                                    style: TextStyle(
+                                    '\$${product.price}',
+                                    // product.price.toString(),
+                                    style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 20),
-                              Text(
+                              const SizedBox(height: 20),
+                              const Text(
                                 "Size:",
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
@@ -121,12 +122,12 @@ class DetailsPage extends StatelessWidget {
                                     const EdgeInsets.only(top: 20, bottom: 20),
                                 child: Text(
                                   product.description,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w400),
                                 ),
                               ),
-                              SizedBox(height: 60),
+                              SizedBox(height: MediaQuery.of(context).size.height * 0.23),
                               Row(
                                 children: [
                                   Expanded(
@@ -135,7 +136,7 @@ class DetailsPage extends StatelessWidget {
                                       listener: (context, state) {
                                         if(state is DeleteLoadedState){
                                           context.read<HomeBloc>().add(LoadAllProductEvent());
-                                          Navigator.pushNamed(context, "/");
+                                          Navigator.pushNamed(context, "/home");
                                         } else if(state is DeleteFailedState){
                                            
                                         }
@@ -151,6 +152,7 @@ class DetailsPage extends StatelessWidget {
                                                     DeleteProductEvent(
                                                         product.id));
                                               },
+                                              
                                               child: Text("DELETE"),
                                               style: OutlinedButton.styleFrom(
                                                   foregroundColor: Colors.red,
@@ -176,7 +178,7 @@ class DetailsPage extends StatelessWidget {
                                             "/update",
                                             arguments: product);
                                       },
-                                      child: Text("UPDATE",
+                                      child: const Text("UPDATE",
                                           style:
                                               TextStyle(color: Colors.white)),
                                       style: ElevatedButton.styleFrom(

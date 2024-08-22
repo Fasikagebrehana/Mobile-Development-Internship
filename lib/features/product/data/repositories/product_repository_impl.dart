@@ -77,7 +77,7 @@ class ProductRepositoryImpl extends ProductRepository {
         final localProducts = await productLocalDataSource.getAllProduct();
         return Right(localProducts.map((product) => product.toEntity()).toList());
       } catch (e) {
-        return const Left(CacheFailure('No cached data available'));
+        return  Left(CacheFailure('$e'));
       }
     }
   }
@@ -123,7 +123,7 @@ class ProductRepositoryImpl extends ProductRepository {
         final localProduct = await productLocalDataSource.getproduct(id);
         return Right(localProduct.toEntity());
       } catch (e) {
-        return const Left(CacheFailure('Product not found in local cache'));
+        return  Left(CacheFailure('Product not found in local cache'));
       }
   }
   }

@@ -88,6 +88,7 @@ class _UpdatePageState extends State<UpdatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -99,18 +100,18 @@ class _UpdatePageState extends State<UpdatePage> {
                 onTap: () {
                   Navigator.of(context).pop();
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back_ios,
                   color: Colors.blue,
                 ),
               ),
-              SizedBox(
-                width: 120,
+              const SizedBox(
+                width: 100,
               ),
-              Text(
+              const Text(
                 "Update Product",
                 style: TextStyle(color: Colors.black),
-              )
+              ),
             ],
           ),
         ),
@@ -118,51 +119,34 @@ class _UpdatePageState extends State<UpdatePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.all(20),
-              child: Container(
-                width: double.infinity,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: GestureDetector(
-                  onTap: _pickImage,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _image == null
-                          ? Icon(
-                              Icons.image_outlined,
-                            )
-                          : Image.file(
-                              _image!,
-                              width: double.infinity,
-                              height: 150,
-                              fit: BoxFit.cover,
-                            ),
-                      SizedBox(height: 10),
-                      Text("Upload your data"),
-                    ],
-                  ),
-                ),
-              ),
+              
+              // child: Container(
+              //   width: double.infinity,
+              //   height: 200,
+              //   decoration: BoxDecoration(
+              //     color: Colors.grey[300],
+              //     borderRadius: BorderRadius.circular(10),
+              //   ),
+              //   ),
             ),
+
             _buildTextField("Name", _nameController),
             SizedBox(height: 40),
             _buildTextField("Category", _categoryController),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             _buildTextField("Price", _priceController, isNumeric: true),
-            SizedBox(height: 40),
-            _buildTextField("Description", _descController, maxLines: 3),
-            SizedBox(height: 30),
+            const SizedBox(height: 40),
+            _buildTextField("Description", _descController, maxLines: 4),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.17),
+            // const SizedBox(height: 50),
             Column(
               children: [
                 BlocListener<UpdateBloc, UpdateState>(
                   listener: (context, state) {
                     if (state is UpdateLoadedState) {
-                      Navigator.pushNamed(context, '/');
+                      Navigator.pushNamed(context, '/home');
                     }
                     // TODO: implement listener
                   },
@@ -179,15 +163,21 @@ class _UpdatePageState extends State<UpdatePage> {
                               description: _descController.text,
                             )))
                       },
-                      child: Text("Update"),
+                      child: const Text("Update",
+                      style: TextStyle(
+                        color: Colors.white
+                      ),
+                      ),
                       style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7)),
                         backgroundColor: Colors.blue,
                         padding: EdgeInsets.symmetric(vertical: 16),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 20),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: OutlinedButton(
@@ -195,11 +185,15 @@ class _UpdatePageState extends State<UpdatePage> {
                     onPressed: () => {},
                     child: Text("Delete"),
                     style: OutlinedButton.styleFrom(
+                      
                       foregroundColor: Colors.red,
                       side: BorderSide(color: Colors.red),
                       padding: EdgeInsets.symmetric(vertical: 16),
-                    ),
-                  ),
+                      
+                    
+                     shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(7)),
+                  ),),
                 ),
               ],
             ),

@@ -25,5 +25,5 @@ class LocalDataSourceFailure extends Failure {
 }
 
 class CacheFailure extends Failure {
-  const CacheFailure([String message = 'Product not found in local cache']) : super(message);
+  CacheFailure(super.message);
 }

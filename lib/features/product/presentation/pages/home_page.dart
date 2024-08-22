@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-
 import '../../../../dependency_injection.dart';
+import '../../../user/presentation/bloc/bloc/profile_bloc.dart';
 import '../../domain/repositories/productRepository.dart';
 import '../../domain/usecases/getAllProduct.dart';
 import '../bloc/bloc/add_bloc.dart';
@@ -17,14 +17,22 @@ class HomePage extends StatelessWidget {
     // setup();
     // final productRepository = BlocProvider.of<ProductRepository>(context);
 
+      context.read<ProfileBloc>().add(ProfileLoadedEvent());
     return Scaffold(
+      backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).pushNamed('/add');
         },
         child: Icon(Icons.add),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50)
+        ),
       ),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
         toolbarHeight: 130,
@@ -53,6 +61,7 @@ class HomePage extends StatelessWidget {
                     ),
                     Row(
                       children: [
+                        
                         Text(
                           "Hello, ",
                           style: TextStyle(
@@ -60,12 +69,28 @@ class HomePage extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                               fontSize: 17),
                         ),
-                        Text(
-                          "Fasika",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        BlocBuilder<ProfileBloc, ProfileState>(
+                          builder: (context, state) {
+                            
+                            if (state is ProfileLoadedState) {
+                              return Text(
+                                  state.user.name ?? '',
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            );
+                            } else if (state is ProfileFailedState) {
+                              return const Text(
+                                'Fasika',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              );
+                            }
+                            return CircularProgressIndicator();
+                          },
                         ),
                       ],
                     ),
@@ -83,11 +108,13 @@ class HomePage extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
+
               ],
             ),
             const SizedBox(height: 15),
             ListTile(
-              title: Text(
+              contentPadding: EdgeInsets.only(left: 20,),
+              title: const Text(
                 "Available Products",
                 style: TextStyle(
                   fontFamily: "Poppins",
@@ -100,9 +127,10 @@ class HomePage extends StatelessWidget {
                   border: Border.all(color: Colors.grey.shade300, width: 1),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
+              // SizedBox(width: 20,),
                 child: GestureDetector(
                   onTap: () => {Navigator.of(context).pushNamed('/search')},
-                  child: Icon(
+                  child: const Icon(
                     Icons.search,
                     size: 40,
                   ),
@@ -125,13 +153,13 @@ class HomePage extends StatelessWidget {
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
             if (state is LoadingState) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is LoadedState) {
               final productWidgets = state.data.map((product) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 25),
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                     ),
                     child: Cards(product: product),
@@ -147,7 +175,7 @@ class HomePage extends StatelessWidget {
                 child: Text('Error: //${state.message}'),
               );
             }
-            return Center(
+            return const Center(
               child: Text('No products available'),
             );
           },

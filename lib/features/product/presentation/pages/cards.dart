@@ -26,7 +26,7 @@ class Cards extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10.0),
                     topRight: Radius.circular(10.0)),
                 child: _buildImage(context, product.imageUrl),
@@ -40,7 +40,7 @@ class Cards extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 10.0, top: 10.0),
                         child: Text(
                           product.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
@@ -49,15 +49,15 @@ class Cards extends StatelessWidget {
                       ),
                       Text(
                         '\$${product.price}',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontFamily: 'Poppins', fontWeight: FontWeight.w500),
                       ),
                     ]),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10),
+              const Padding(
+                padding: EdgeInsets.only(left: 10, right: 10),
                 child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       // Text(
                       //   product.type,

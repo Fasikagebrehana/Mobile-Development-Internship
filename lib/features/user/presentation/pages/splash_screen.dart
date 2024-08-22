@@ -1,11 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin{
+  @override
+    void initState(){
+      super.initState();
+        Future.delayed(Duration(seconds: 3), () async{
+          final cache = await SharedPreferences.getInstance();
+          final isLoggedIn = cache.getBool('isLoggedIn') ?? false;
+
+          if (isLoggedIn) {
+            Navigator.pushNamed(context, '/home');
+          }else {
+            Navigator.pushNamed(context, '/login');
+          }
+          });
+        
+        }
+
+  @override
   Widget build(BuildContext context) {
+   
+
+    
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -62,3 +87,5 @@ class SplashScreen extends StatelessWidget {
       );
   }
 }
+  
+

@@ -15,6 +15,14 @@ import 'features/product/domain/usecases/deleteProduct.dart';
 import 'features/product/domain/usecases/getAllProduct.dart';
 import 'features/product/domain/usecases/getproduct.dart';
 import 'features/product/domain/usecases/updateProduct.dart';
+import 'features/user/data/data_sources/user_local_data_source.dart';
+import 'features/user/data/data_sources/user_remote_data_source.dart';
+import 'features/user/data/repository/user_repository_impl.dart';
+import 'features/user/domain/repository/UserRepository.dart';
+import 'features/user/domain/usecases/login.dart';
+import 'features/user/domain/usecases/profile.dart';
+import 'features/user/domain/usecases/signup.dart';
+import 'features/user/presentation/bloc/bloc/profile_bloc.dart';
 // import 
 
 GetIt getIt = GetIt.instance;
@@ -36,7 +44,21 @@ Future<void> setup() async{
   getIt.registerSingleton<GetProduct>(GetProduct(getIt()));
   getIt.registerSingleton<Addproduct>(Addproduct(getIt()));
   getIt.registerSingleton<UpdateProduct>(UpdateProduct(getIt()));
-    getIt.registerSingleton<Deleteproduct>(Deleteproduct(getIt()));
+  getIt.registerSingleton<Deleteproduct>(Deleteproduct(getIt()));
+getIt.registerSingleton<UserRemoteDataSource>(UserRemoteDataSourceImpl(client: getIt(), sharedPreferences: getIt()));
+  getIt.registerSingleton<UserLocalDataSource>(UserLocalDataSourceImpl(sharedPreference: getIt()));
+
+    getIt.registerSingleton<UserRepository>(UserRepositoryImpl(userLocalDataSource: getIt(), userRemoteDataSource: getIt()));
+  getIt.registerSingleton<SignupUsecase>(SignupUsecase(getIt()));
+  getIt.registerSingleton<Login>(Login(getIt()));
+
+
+  getIt.registerSingleton<Profile>(Profile(getIt()));
+  getIt.registerSingleton<ProfileBloc>(ProfileBloc(getIt()));
+  // getIt.registerSingleton<Login>(Login(getIt()));
 
   
+
+  
+
 }

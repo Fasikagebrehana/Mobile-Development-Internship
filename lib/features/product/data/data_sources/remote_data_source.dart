@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/failure/exceptions.dart';
@@ -26,9 +27,18 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   @override
   Future<ProductModel> getproduct(String id) async {
     final url =
-        'https://g5-flutter-learning-path-be.onrender.com/api/v1/products/$id';
+        'https://g5-flutter-learning-path-be.onrender.com/api/v2/products/$id';
 
-    final response = await client.get(Uri.parse(url));
+    var instance = await SharedPreferences.getInstance();
+    var token = instance.getString('token');
+    
+
+    final response = await client.get(Uri.parse(url),
+    headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token'
+        },
+    );
 
     if (response.statusCode == 200) {
       final jsonList = json.decode(response.body) as Map<String, dynamic>;
@@ -41,9 +51,18 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   @override
   Future<List<ProductModel>> getAllProduct() async {
     final url =
-        'https://g5-flutter-learning-path-be.onrender.com/api/v1/products/';
+        'https://g5-flutter-learning-path-be.onrender.com/api/v2/products/';
 
-    final response = await client.get(Uri.parse(url));
+    var instance = await SharedPreferences.getInstance();
+    var token = instance.getString('token');
+    final response = await client.get(Uri.parse(url),
+    
+    headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token'
+        },
+    );
+    print(token);
 
     if (response.statusCode == 200) {
       final jsonList = json.decode(response.body) as Map<String, dynamic>;
@@ -61,9 +80,16 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   @override
   Future<String> deleteProduct(String id) async {
     final url =
-        'https://g5-flutter-learning-path-be.onrender.com/api/v1/products/$id';
+        'https://g5-flutter-learning-path-be.onrender.com/api/v2/products/$id';
+        var instance = await SharedPreferences.getInstance();
+    var token = instance.getString('token');
 
-    final response = await client.delete(Uri.parse(url));
+    final response = await client.delete(Uri.parse(url),
+    headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token'
+        },
+    );
     // print(response);
     final statusCode = response.statusCode;
     // print(json.decode(response.body));
@@ -78,9 +104,18 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   @override
   Future<ProductModel> addProduct(ProductModel product) async {
     final url =
-        'https://g5-flutter-learning-path-be.onrender.com/api/v1/products/';
+        'https://g5-flutter-learning-path-be.onrender.com/api/v2/products/';
+        var instance = await SharedPreferences.getInstance();
+    var token = instance.getString('token');
 
-    final request = http.MultipartRequest('POST', Uri.parse(url));
+        // headers: {
+        //   'Content-Type': 'application/json',
+        //   'Authorization': 'Bearer $token'
+        // },
+
+    final request = http.MultipartRequest('POST', Uri.parse(url),
+   
+    );
     request.fields['name'] = product.name;
     request.fields['description'] = product.description;
     request.fields['price'] = product.price.toString();
@@ -88,11 +123,13 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
         'image', product.imageUrl,
         contentType: MediaType('image', 'jpg')));
 
+    request.headers['Authorization'] = 'Bearer $token';
+
     final res = await client.send(request);
     final response = await http.Response.fromStream(res);
     // print(response);
     // print(json.decode(response.body));
-
+    print(token);
     if (response.statusCode == 201) {
       final Map<String, dynamic> jsonList = json.decode(response.body)["data"];
       return ProductModel.fromJson(jsonList);
@@ -103,12 +140,15 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
 
   @override
   Future<ProductModel> updateProduct(ProductModel product) async {
-    // final url = 'https://g5-flutter-learning-path-be.onrender.com/api/v1/products/$';
+    // final url = 'https://g5-flutter-learning-path-be.onrender.com/api/v2/products/$';
     print(product.toJson());
     try {
+      var instance = await SharedPreferences.getInstance();
+      var token = instance.getString('token');
       final response = await client.put(Uri.parse(Urls.updateProduct(product.id)),
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token'
         },
         body: json.encode({
           'name': product.name,

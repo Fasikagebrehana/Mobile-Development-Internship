@@ -15,6 +15,25 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
+
+  TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
+  void _onSearchChanged() {
+    context.read<SearchBloc>().add(SearchProductEvent(searchController.text));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +84,7 @@ class _SearchState extends State<Search> {
                       children: [
                         Expanded(
                           child: TextField(
+                            controller: searchController, // Corrected: Controller added
                             decoration: const InputDecoration(
                               suffixIcon: Icon(
                                 Icons.arrow_right_alt_outlined,
@@ -119,7 +139,18 @@ class _SearchState extends State<Search> {
                     if (state is LoadingState) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is LoadedState) {
-                      final productWidgets = state.data.map((product) {
+                      // Filter products based on the search query
+                      final filteredProducts = state.data.where((product) {
+                        return product.name.toLowerCase().contains(
+                              searchController.text.toLowerCase(),
+                            );
+                      }).toList();
+
+                      if (filteredProducts.isEmpty) {
+                        return const Center(child: Text('No products found'));
+                      }
+
+                      final productWidgets = filteredProducts.map((product) {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 25),
                           child: Container(
@@ -152,6 +183,7 @@ class _SearchState extends State<Search> {
     );
   }
 }
+
 
 class RangeSliderWidget extends StatefulWidget {
   const RangeSliderWidget({Key? key}) : super(key: key);
